@@ -29,8 +29,34 @@ iconos = {
 }
 
 # Título
-st.title("🧠 Clasificador de imágenes (32x32)")
+st.title("🧠 Clasificador de imágenes")
 
+st.write("")
+# Explicación
+st.markdown(
+    """
+    Esta aplicación utiliza un modelo de aprendizaje automático entrenado con imágenes de 10 categorías conocidas para predecir a qué clase pertenece una imagen cargada por el usuario.
+
+    📌 **Importante**: Este clasificador solo puede identificar imágenes que correspondan a las siguientes categorías:
+
+    - ✈️ avión
+    - 🚗 automóvil
+    - 🐦 pájaro
+    - 🐱 gato
+    - 🦌 ciervo
+    - 🐶 perro
+    - 🐸 rana
+    - 🐴 caballo
+    - 🚢 barco
+    - 🚚 camión
+
+    ✅ El modelo fue entrenado con un conjunto de datos balanceado y alcanza una **precisión del 95%** sobre los datos de prueba.
+
+    ⚠️ Si subís imágenes que no pertenezcan a estas clases, el modelo puede predecir incorrectamente la categoría más parecida.
+    """,
+    unsafe_allow_html=True
+)
+st.write("")
 # Subida de imagen
 imagen_subida = st.file_uploader("📷 Subí una imagen", type=["jpg", "jpeg", "png"])
 
@@ -52,13 +78,26 @@ if imagen_subida is not None:
     st.markdown(f"### 🎯 Clasificación: **{emoji} {clase_predicha}** ")
     
 
+st.write("")
+st.write("")
 
 st.markdown("---")
 st.markdown("#### 📬 Contacto")
+
 st.markdown(
     """
-    <a href="https://github.com/NahuelFacello" target="_blank"><button>💻 GitHub</button></a>
-    <a href="https://www.linkedin.com/in/nahuel-facello/" target="_blank"><button>🔗 LinkedIn</button></a>
+    <div style="display: flex; justify-content: center; gap: 20px; margin-top: 10px;">
+        <a href="https://github.com/NahuelFacello" target="_blank">
+            <button style="padding: 10px 20px; font-size: 16px; border-radius: 8px; border: none; background-color: #24292e; color: white; cursor: pointer;">
+                💻 GitHub
+            </button>
+        </a>
+        <a href="https://www.linkedin.com/in/nahuel-facello/" target="_blank">
+            <button style="padding: 10px 20px; font-size: 16px; border-radius: 8px; border: none; background-color: #0072b1; color: white; cursor: pointer;">
+                🔗 LinkedIn
+            </button>
+        </a>
+    </div>
     """,
     unsafe_allow_html=True
 )
