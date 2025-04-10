@@ -58,24 +58,23 @@ st.markdown(
 )
 st.write("")
 # Subida de imagen
-imagen_subida = st.file_uploader("📷 Subí una imagen", type=["jpg", "jpeg", "png"])
-
 if imagen_subida is not None:
-    imagen = Image.open(imagen_subida)
+    imagen = Image.open(imagen_subida).convert("RGB")
     st.image(imagen, caption="Imagen cargada", use_container_width=True)
 
-    # Preprocesar imagen
-    imagen = imagen.resize((32, 32))                         # Redimensionar a 32x32
-    imagen_array = img_to_array(imagen) / 255.0              # Normalizar
-    imagen_array = np.expand_dims(imagen_array, axis=0)      # Agregar dimensión batch
+    # Preprocesamiento exacto que espera el modelo
+    imagen = imagen.resize((32, 32))  # Tu modelo fue entrenado con 32x32
+    imagen_array = img_to_array(imagen) / 255.0  # Normalizar
+    imagen_array = np.expand_dims(imagen_array, axis=0)  # (1, 32, 32, 3)
+    imagen_array = imagen_array.reshape(1, -1)  # (1, 3072)
 
     # Predicción
     prediccion = modelo.predict(imagen_array)
     indice_prediccion = np.argmax(prediccion)
     clase_predicha = nombres_clases[indice_prediccion]
     emoji = iconos.get(clase_predicha, '')
-    # Mostrar resultado
-    st.markdown(f"### 🎯 Clasificación: **{emoji} {clase_predicha}** ")
+
+    st.markdown(f"### 🎯 Clasificación: **{emoji} {clase_predicha}** (Clase {indice_prediccion})")
     
 
 st.write("")
