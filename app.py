@@ -15,6 +15,19 @@ modelo = cargar_modelo()
 nombres_clases = ['avión', 'automóvil', 'pájaro', 'gato', 'ciervo', 
                   'perro', 'rana', 'caballo', 'barco', 'camión']
 
+iconos = {
+    'avión': '✈️',
+    'automóvil': '🚗',
+    'pájaro': '🐦',
+    'gato': '🐱',
+    'ciervo': '🦌',
+    'perro': '🐶',
+    'rana': '🐸',
+    'caballo': '🐴',
+    'barco': '🚢',
+    'camión': '🚚'
+}
+
 # Título
 st.title("🧠 Clasificador de imágenes (32x32)")
 
@@ -34,6 +47,18 @@ if imagen_subida is not None:
     prediccion = modelo.predict(imagen_array)
     indice_prediccion = np.argmax(prediccion)
     clase_predicha = nombres_clases[indice_prediccion]
-
+    emoji = iconos.get(clase_predicha, '')
     # Mostrar resultado
-    st.markdown(f"### 🎯 Clasificación: **{clase_predicha}** (Clase {indice_prediccion})")
+    st.markdown(f"### 🎯 Clasificación: **{emoji} {clase_predicha}** ")
+    
+
+
+st.markdown("---")
+st.markdown("#### 📬 Contacto")
+st.markdown(
+    """
+    <a href="https://github.com/NahuelFacello" target="_blank"><button>💻 GitHub</button></a>
+    <a href="https://www.linkedin.com/in/nahuel-facello/" target="_blank"><button>🔗 LinkedIn</button></a>
+    """,
+    unsafe_allow_html=True
+)
